@@ -9,14 +9,17 @@ const Sidebar = ({ togglePopup, showPopup, chatHistory, activeChat, onNewChat, o
         }
     };
 
+    const getUserFirstName = () => {
+        const userData = JSON.parse(localStorage.getItem('userMedicalData')) || {};
+        const fullName = userData.fullName || '';
+        return fullName.split(' ')[0];
+    };
+
     return (
         <div className="sidebar">
-            <h1 className="app-title">John's Health Companion</h1>
+            <h1 className="app-title">{getUserFirstName()}'s Health Companion</h1>
 
-            <ButtonComponent togglePopup={togglePopup} />
-            
-            <button className="action-button">Medical History</button>
-            <button className="action-button">Book Appointment</button>
+            <button className="action-button" onClick={togglePopup}>{showPopup ? 'Close Card' : 'Open Card'}</button>
             <button 
                 className="action-button" 
                 onClick={clearAllData}

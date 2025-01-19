@@ -114,7 +114,8 @@ function App() {
               <h2>Card Popup!</h2>
               <p>Data goes here...</p>
               <button onClick={togglePopup}>Close</button>
-          </div>
+            </div>
+          )}
         </>
       )}
     </div>
