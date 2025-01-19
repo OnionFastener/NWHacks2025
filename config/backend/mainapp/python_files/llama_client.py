@@ -1,6 +1,8 @@
 import asyncio
 from typing import Optional
 from contextlib import AsyncExitStack
+import csv
+import pandas as pd
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
@@ -10,11 +12,11 @@ import mainapp.python_files.llm_chat as llm_chat
 
 
 class MCPClient:
-    def __init__(self):
+    def __init__(self, context=None):
         # Initialize session and client objects
         self.session: Optional[ClientSession] = None
         self.exit_stack = AsyncExitStack()
-        self.llm_instance = Llm()
+        self.llm_instance = Llm(context)
         llm_chat.add_observer(self)
 
     # methods will go here
@@ -55,15 +57,13 @@ class MCPClient:
 
         # resource = asyncio.run(self.session.read_resource("data://drugs_data.csv"))
         # REPLACE WITH GOOD TODO
-        context = "Headache medicine: Ibuprofen, Acetaminophen, Aspirin"
+        # context = "Headache medicine: Ibuprofen, Acetaminophen, Aspirin"
 
         # Llama call
         print("calling Llama")
-        yield from self.llm_instance.send_prompt(query, context, append_string)
+        yield from self.llm_instance.send_prompt(query, context=append_string)
 
         # Process response and handle tool calls
-        tool_results = []
-        final_text = []
 
         # if str(response)[0] == "{":
         #     response = response["content"]
@@ -83,6 +83,14 @@ async def setup():
     server_path = "./mainapp/python_files/llama_server.py"
     client = MCPClient()
     try:
+        file = "medicine_context.csv"
+        content = "Acetaminophen,Tylenol,'reliever/fever reducerUses temporarily relieves minor aches and pains due to: minor pain of arthritis , muscular aches, backache, premenstrual and menstrual cramps, the common cold, headache, toothache, temporarily reduces fever','Liver Warning: This product contains acetaminophen. Severe liver damage may occur if you take, more than 6 caplets in 24 hours, which is the maximum daily amount, with other drugs containing acetaminophen, 3 or more alcoholic drinks every day while using this product Allergy Alert: Acetaminophen may cause severe skin reactions.  Symptoms may include: skin reddening, blisters, rash. If a skin reaction occurs, stop use and seek medical help right away. ','Do not use with any other drug containing acetaminophen (prescription or nonprescription). If you are not sure whether a drug contains acetaminophen, ask a doctor or pharmacist.Ibuprofen,Advil,'headaches, toothaches, backaches, mentrual cramps, common cold, muscle aches, minor pain of arthritis, fever','Allergy alert:Ibuprofen may cause a severe allergic reaction, especially in people allergic to aspirin. Symptoms may include:hives facial swelling asthma (wheezing) shock skin reddening rash blisters If an allergic reaction occurs, stop use and seek medical help right away. "
+        context = {"role": "tool", "content": content}
+        chatbot_system = {
+            "role": "system",
+            "content": "You are a helpful and knowledgeable medical assistant who gives brief correct answers including recommended medications. Ask for more information if the description is too vague. Maximum 3 sentences per response.",
+        }
+        client.llm_instance = Llm(context, chatbot_system)
         await client.connect_to_server(server_path)
         # await client.chat_loop()
     finally:

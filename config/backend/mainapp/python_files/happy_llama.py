@@ -6,22 +6,21 @@ import asyncio
 class Llm:
     _context = []
 
-    def __init__(self):
+    def __init__(self, context=None, system=None):
         self._llm = Llama(
-            model_path="./mainapp/python_files/models/Llama-3.2-1B-Instruct-Q6_K_L.gguf",
+            model_path="mainapp/python_files/models/Llama-3.2-1B-Instruct-Q6_K_L.gguf",
             n_gpu_layers=-1,
             n_ctx=4096,
         )
-        self._context.append(
-            {
-                "role": "system",
-                "content": "You are a helpful and knowledgeable medical assistant who gives brief correct answers including recommended medications. Maximum 3 sentences per response.",
-            }
-        )
+        if context != None:
+            self._context.append(context)
+        if system != None:
+            self._context.append(system)
 
-    def send_prompt(self, prompt, context, callback=None):
+    def send_prompt(self, prompt, context=None):
         self._context.append({"role": "user", "content": prompt})
-        self._context.append({"role": "tool", "content": context})
+        if context != None:
+            self._context.append({"role": "tool", "content": context})
         print("getting response")
         yield from self.get_response()
         # print(response["choices"][0]["message"])
