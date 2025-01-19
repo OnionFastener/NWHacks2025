@@ -12,10 +12,13 @@ def add(a: int, b: int) -> int:
 
 
 # Add a dynamic greeting resource
-@mcp.resource("greeting://{name}")
-def get_greeting(name: str) -> str:
+@mcp.resource("data://{filename}")
+async def get_greeting(filename: str) -> str:
     """Get a personalized greeting"""
-    return f"Hello, {name}!"
+    file = open(filename, "r")
+    content = file.read()
+    file.close()
+    return content
 
 
 if __name__ == "__main__":
