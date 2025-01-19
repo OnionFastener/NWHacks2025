@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/Sidebar.css';
 
-const Sidebar = ({ chatHistory, activeChat, onNewChat, onChatSelect, onDeleteChat }) => {
+const Sidebar = ({ togglePopup, showPopup, chatHistory, activeChat, onNewChat, onChatSelect, onDeleteChat }) => {
     const clearAllData = () => {
         if (window.confirm('This will clear all your data and restart the app. Are you sure?')) {
             localStorage.clear();
@@ -9,11 +9,17 @@ const Sidebar = ({ chatHistory, activeChat, onNewChat, onChatSelect, onDeleteCha
         }
     };
 
+    const getUserFirstName = () => {
+        const userData = JSON.parse(localStorage.getItem('userMedicalData')) || {};
+        const fullName = userData.fullName || '';
+        return fullName.split(' ')[0];
+    };
+
     return (
         <div className="sidebar">
-            <h1 className="app-title">John's Health Companion</h1>
-            <button className="action-button">Medical History</button>
-            <button className="action-button">Book Appointment</button>
+            <h1 className="app-title">{getUserFirstName()}'s Health Companion</h1>
+
+            <button className="action-button" onClick={togglePopup}>{showPopup ? 'Close Card' : 'Open Card'}</button>
             <button 
                 className="action-button" 
                 onClick={clearAllData}

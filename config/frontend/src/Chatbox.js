@@ -26,7 +26,7 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
         // Add user message immediately
         const updatedMessages = [...messages, { type: 'user', text: inputValue }];
         updateMessages(updatedMessages);
-        
+
         try {
             const response = await fetch('/get_response/', {
                 method: 'POST',
@@ -36,10 +36,10 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
                 },
                 body: JSON.stringify({ text: inputValue })
             });
-      
+
             const data = await response.json();
             setInputValue(''); // Clear input after sending
-            
+
             if (data.result) {
                 // Add AI response
                 updateMessages([...updatedMessages, { type: 'ai', text: data.result }]);
@@ -59,7 +59,7 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
         ));
     };
 
-    return (  
+    return (
         <div className="chatbox" style={{
             position: 'fixed',
             top: 0,
@@ -69,17 +69,17 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
             display: 'flex',
             overflow: 'hidden'
         }}>
-            <div style={{ 
-                width: '1100px', 
+            <div style={{
+                width: '1100px',
                 height: '100%',
-                display: 'flex', 
+                display: 'flex',
                 flexDirection: 'column',
                 padding: '15px',
                 overflow: 'hidden'
             }}>
-                <div 
+                <div
                     ref={chatAreaRef}
-                    className="chat-area" 
+                    className="chat-area"
                     style={{
                         flex: 1,
                         overflowY: 'auto',
@@ -88,14 +88,14 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
                         marginBottom: '15px'
                     }}
                 >
-                    <div style={{ 
+                    <div style={{
                         marginTop: 'auto',
                         display: 'flex',
                         flexDirection: 'column',
                         width: '100%'
                     }}>
                         {messages.map((message, index) => (
-                            <div 
+                            <div
                                 key={index}
                                 style={{
                                     width: '100%',
@@ -104,7 +104,7 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
                                     marginBottom: '10px'
                                 }}
                             >
-                                <div 
+                                <div
                                     className={`message ${message.type}-message`}
                                     style={{
                                         display: 'inline-block',
@@ -129,8 +129,8 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
 
                 <div style={{
                     position: 'relative',
-                    display: 'flex', 
-                    flexDirection: 'column', 
+                    display: 'flex',
+                    flexDirection: 'column',
                     gap: '10px',
                     backgroundColor: 'white',
                     zIndex: 1
