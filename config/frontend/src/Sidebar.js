@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/Sidebar.css';
 
-const Sidebar = ({ chatHistory, activeChat, onNewChat, onChatSelect, onDeleteChat }) => {
+const Sidebar = ({ togglePopup, showPopup, chatHistory, activeChat, onNewChat, onChatSelect, onDeleteChat }) => {
     const clearAllData = () => {
         if (window.confirm('This will clear all your data and restart the app. Are you sure?')) {
             localStorage.clear();
@@ -12,6 +12,9 @@ const Sidebar = ({ chatHistory, activeChat, onNewChat, onChatSelect, onDeleteCha
     return (
         <div className="sidebar">
             <h1 className="app-title">John's Health Companion</h1>
+
+            <ButtonComponent togglePopup={togglePopup} />
+            
             <button className="action-button">Medical History</button>
             <button className="action-button">Book Appointment</button>
             <button 

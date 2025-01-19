@@ -5,10 +5,17 @@ import OnboardingForm from './OnboardingForm';
 import './styles/App.css';
 
 function App() {
+  
   const [chatHistory, setChatHistory] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [isFirstTime, setIsFirstTime] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const togglePopup = () => {
+    console.log("toggled")
+    setShowPopup(!showPopup);
+  }
 
   useEffect(() => {
     // Check if user has completed onboarding
@@ -89,6 +96,8 @@ function App() {
       ) : (
         <>
           <Sidebar 
+            togglePopup={togglePopup} 
+            showPopup={showPopup}
             chatHistory={chatHistory}
             activeChat={activeChat}
             onNewChat={handleNewChat}
@@ -100,6 +109,12 @@ function App() {
             updateMessages={updateMessages}
             activeChat={activeChat}
           />
+          {showPopup && (
+            <div className="popup-card">
+              <h2>Card Popup!</h2>
+              <p>Data goes here...</p>
+              <button onClick={togglePopup}>Close</button>
+          </div>
         </>
       )}
     </div>

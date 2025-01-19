@@ -5,6 +5,73 @@
   overflow: hidden;
 }
 
+/* Card container */
+.popup-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centers the card */
+  background-color: white;
+  padding: 20px;
+  width: 300px; /* Adjust width */
+  height: 200px; /* Adjust height */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  z-index: 1000; /* Makes sure the popup appears above other elements */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures the content is spaced out */
+  align-items: center; /* Centers the content horizontally */
+  transition: all 0.3s ease-in-out; /* Smooth animation when it appears/disappears */
+}
+
+/* Background overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+  z-index: 999; /* Makes sure the overlay is behind the popup */
+}
+
+/* Button styles inside the popup */
+.popup-card button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  align-self: center;
+}
+
+.popup-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Popup card title */
+.popup-card h2 {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Popup content */
+.popup-card p {
+  text-align: center;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+/* Card container to position in App.js */
+.card_container {
+  position: relative;
+}
 /* Sidebar styling */
 .sidebar {
   position: fixed;
