@@ -63,11 +63,12 @@ class MCPClient:
         # Process response and handle tool calls
         tool_results = []
         final_text = []
+        for chunk in response:
+            if "content" in chunk["choices"][0]["delta"]:
+                print(chunk["choices"][0]["delta"]["content"], end="")
 
-        response = response["choices"][0]["message"]["content"]
-
-        if str(response)[0] == "{":
-            response = response["content"]
+        # if str(response)[0] == "{":
+        #     response = response["content"]
 
         return response
 

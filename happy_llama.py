@@ -1,4 +1,6 @@
 from llama_cpp import Llama
+from llama_cpp import llama_types
+import asyncio
 
 
 class Llm:
@@ -17,15 +19,20 @@ class Llm:
             }
         )
 
-    def send_prompt(self, prompt, context):
+    def send_prompt(self, prompt, context, callback=None):
         self._context.append({"role": "user", "content": prompt})
         self._context.append({"role": "tool", "content": context})
-        response = self.get_response()
-        self._context.append(
-            {"role": "assistant", "content": response["choices"][0]["message"]}
-        )
-        return response
+        asyncio.run(self.get_response(callback))
+        # print(response["choices"][0]["message"])
+        # self._context.append(
+        #     {"role": "assistant", "content": response["choices"][0]["message"]}
+        # )
 
-    def get_response(self):
-        output = self._llm.create_chat_completion(self._context, max_tokens=512)
-        return output
+    async def get_response(self, callback):
+        tasks = []
+        for chunk in self._llm.create_chat_completion(
+            self._context, max_tokens=512, stream=True
+        ):
+            if "content" in chunk["choices"][0]["delta"]:
+                tasks.append(asyncio.create_task(callback(chunk)))
+        asyncio.gather(*tasks)
