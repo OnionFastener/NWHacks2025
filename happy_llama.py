@@ -2,44 +2,30 @@ from llama_cpp import Llama
 
 
 class Llm:
-    _prompt = "Answer the question in a few words using the context below and your own knowledge. If question doesn't match context, ignore context, recommend doctor."
-    _context = " Context: "
-    _question = " Question: "
+    _context = []
 
     def __init__(self):
         self._llm = Llama(
             model_path="./models/Llama-3.2-1B-Instruct-Q6_K_L.gguf",
             n_gpu_layers=-1,
+            n_ctx=4096,
+        )
+        self._context.append(
+            {
+                "role": "system",
+                "content": "You are a helpful and knowledgeable medical assistant who gives brief correct answers including recommended medications",
+            }
         )
 
-    def set_prompt(self, prompt, context):
-        self._prompt = (
-            # self._prompt
-            # + self._context
-            # + context
-            self._question
-            + prompt
-            + " Answer: "
+    def send_prompt(self, prompt, context):
+        self._context.append({"role": "user", "content": prompt})
+        self._context.append({"role": "tool", "content": context})
+        response = self.get_response()
+        self._context.append(
+            {"role": "assistant", "content": response["choices"][0]["message"]}
         )
+        return response
 
     def get_response(self):
-        output = self._llm(
-            self._prompt,
-            max_tokens=64,
-            echo=False,
-        )
+        output = self._llm.create_chat_completion(self._context, max_tokens=512)
         return output
-
-    def embed_response(self, response):
-        return self._llm.create_embedding(response)
-
-    def print_response(
-        self,
-        prompt=_prompt,
-        context="You are a helpful assistant with lots of knowledge in medicine",
-    ):
-        if prompt == "":
-            print("empty prompt!")
-            return
-        self.set_prompt(prompt, context)
-        print(self.get_response())

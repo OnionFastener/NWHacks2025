@@ -58,14 +58,13 @@ class MCPClient:
         context = "Headache medicine: Ibuprofen, Acetaminophen, Aspirin"
 
         # Llama call
-        self.llm_instance.set_prompt(query, context)
-        response = self.llm_instance.get_response()
+        response = self.llm_instance.send_prompt(query, context)
 
         # Process response and handle tool calls
         tool_results = []
         final_text = []
 
-        response = ast.literal_eval(str(response["choices"])[1:-1])["text"]
+        response = response["choices"][0]["message"]["content"]
 
         return response
 
