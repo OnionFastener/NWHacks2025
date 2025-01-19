@@ -4,6 +4,16 @@ import './styles/Chatbox.css';
 const Chatbox = ({ messages, updateMessages, activeChat }) => {
     const [inputValue, setInputValue] = useState("");
     const chatAreaRef = useRef(null);
+<<<<<<< HEAD
+=======
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
+    const getUserFirstName = () => {
+        const userData = JSON.parse(localStorage.getItem('userMedicalData')) || {};
+        const fullName = userData.fullName || '';
+        return fullName.split(' ')[0];
+    };
+>>>>>>> amon_final2
 
     // Auto scroll to bottom when messages change
     useEffect(() => {
@@ -23,6 +33,13 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
     const handleSubmit = async () => {
         if (!inputValue.trim() || !activeChat) return;
 
+<<<<<<< HEAD
+=======
+        if (!hasSubmitted) {
+            setHasSubmitted(true);
+        }
+
+>>>>>>> amon_final2
         // Add user message immediately
         const updatedMessages = [...messages, { type: 'user', text: inputValue }];
         updateMessages(updatedMessages);
@@ -88,6 +105,28 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
                         marginBottom: '15px'
                     }}
                 >
+<<<<<<< HEAD
+=======
+                    {!hasSubmitted && (
+                        <div
+                            style={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                textAlign: 'center',
+                                color: 'black',
+                                fontSize: '24px'
+                            }}
+                        >
+                            Hey {getUserFirstName()}, I'm your personal MediCompanion.
+                            <br />
+                            <span style={{ display: 'block', marginTop: '15px', color: 'black' }}>Type something to get started!
+                            </span>
+                        </div>
+                    )}
+
+>>>>>>> amon_final2
                     <div style={{
                         marginTop: 'auto',
                         display: 'flex',
@@ -120,7 +159,24 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
                                         boxSizing: 'border-box'
                                     }}
                                 >
+<<<<<<< HEAD
                                     {formatText(message.text)}
+=======
+                                    {message.type === 'ai' ? (
+                                        <div className="model-response">
+                                            <img
+                                                src={require('./images/robot.png')}
+                                                alt="AI Assistant"
+                                                className="robot-icon"
+                                            />
+                                            <div className="response-content">
+                                                {formatText(message.text)}
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        formatText(message.text)
+                                    )}
+>>>>>>> amon_final2
                                 </div>
                             </div>
                         ))}

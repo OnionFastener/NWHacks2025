@@ -5,6 +5,111 @@
   overflow: hidden;
 }
 
+<<<<<<< HEAD
+=======
+/* Card container */
+.popup-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 30px;
+  width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  max-height: fit-content;
+}
+
+.popup-content {
+  flex: 0 1 auto;
+  overflow-y: auto;
+  padding: 10px;
+  padding-bottom: 0;
+}
+
+.info-section {
+  margin-bottom: 10px;
+  /* Reduced from 20px */
+}
+
+.info-section:last-child {
+  margin-bottom: 0;
+  /* Remove margin for last section */
+}
+
+.info-section h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.info-section p {
+  line-height: 1.5;
+  color: #666;
+}
+
+.popup-card button {
+  margin-top: 0;
+  width: 120px;
+  align-self: center;
+}
+
+/* Background overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent dark background */
+  z-index: 999;
+  /* Makes sure the overlay is behind the popup */
+}
+
+/* Button styles inside the popup */
+.popup-card button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  align-self: center;
+}
+
+.popup-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Popup card title */
+.popup-card h2 {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Popup content */
+.popup-card p {
+  text-align: center;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+/* Card container to position in App.js */
+.card_container {
+  position: relative;
+}
+
+>>>>>>> amon_final2
 /* Sidebar styling */
 .sidebar {
   position: fixed;
@@ -22,13 +127,43 @@
 /* Chatbox container */
 .chatbox {
   flex: 1;
+<<<<<<< HEAD
   margin-left: 290px !important; /* Increased margin to account for sidebar width + padding */
+=======
+  margin-left: 290px !important;
+  /* Increased margin to account for sidebar width + padding */
+>>>>>>> amon_final2
   padding: 20px;
 }
 
 /* Ensure the chat area doesn't go under the sidebar */
+<<<<<<< HEAD
 .chatbox > div {
   max-width: calc(100% - 40px);
   height: 100%;
   margin: 0 auto;
+=======
+.chatbox>div {
+  max-width: calc(100% - 40px);
+  height: 100%;
+  margin: 0 auto;
+}
+
+.basic-info {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.basic-info p {
+  margin: 5px 0;
+  text-align: left;
+}
+
+.basic-info strong {
+  color: #333;
+  width: 140px;
+  display: inline-block;
+>>>>>>> amon_final2
 }

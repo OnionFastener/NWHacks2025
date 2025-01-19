@@ -4,11 +4,14 @@
 /node_modules
 /.pnp
 .pnp.js
+<<<<<<< HEAD
 /config/backend/mainapp/python_files/models/*
 config/backend/mainapp/python_files/models/*
 **/*.gguf
 
 **/__pycache__
+=======
+>>>>>>> amon_final2
 
 # testing
 /coverage
@@ -26,3 +29,10 @@ config/backend/mainapp/python_files/models/*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
+=======
+
+myenv/
+
+.env
+>>>>>>> amon_final2
