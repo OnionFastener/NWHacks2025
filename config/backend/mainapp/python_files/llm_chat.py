@@ -1,3 +1,5 @@
+import asyncio
+
 _observers = []
 
 
@@ -6,8 +8,7 @@ def add_observer(observer):
 
 
 def generate_response(text):
-    response = ""
+    print("generating response")
     for observer in _observers:
-        response += observer.process_query(text)
-    return response
-
+        print("notifying observers")
+        yield from observer.process_query(text)
