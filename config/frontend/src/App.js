@@ -11,6 +11,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [isFirstTime, setIsFirstTime] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
+  const [isFirstChat, setIsFirstChat] = useState(false);
 
   const togglePopup = () => {
     console.log("toggled")

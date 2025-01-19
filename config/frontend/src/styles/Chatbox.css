@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 20px;
-  background-color: #fff;
+  background: linear-gradient(to bottom right, #ebf8ff, #eef2ff); /* Gradient from blue-50 to indigo-50 */
 }
 
 .chat-area {
@@ -25,7 +25,7 @@
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 10px;
   min-height: 20px;
   max-height: 150px;
   overflow-y: auto;
