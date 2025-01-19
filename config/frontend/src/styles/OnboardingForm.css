@@ -1,0 +1,74 @@
+.onboarding-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.onboarding-form {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.onboarding-form h1 {
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.onboarding-form p {
+    color: #666;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-step {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-step input,
+.form-step select,
+.form-step textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.form-step textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-step button {
+    padding: 12px;
+    background-color: #0ea5e9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.form-step button:hover {
+    background-color: #0284c7;
+    transform: translateY(-1px);
+}
+
+.form-step button[onClick="prevStep"] {
+    background-color: #f0f2f5;
+    color: #1a1a1a;
+}
+
+.form-step button[onClick="prevStep"]:hover {
+    background-color: #e4e6e9;
+} 
