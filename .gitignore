@@ -6,6 +6,9 @@
 .pnp.js
 /config/backend/mainapp/python_files/models/*
 config/backend/mainapp/python_files/models/*
+**/*.gguf
+
+**/__pycache__
 
 # testing
 /coverage
