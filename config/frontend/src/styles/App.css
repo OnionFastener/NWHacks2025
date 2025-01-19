@@ -1,7 +1,7 @@
 .app {
   display: flex;
   height: 100vh;
-  background-color: #ffffff;
+  width: 100vw;
   overflow: hidden;
 }
 
@@ -71,4 +71,31 @@
 /* Card container to position in App.js */
 .card_container {
   position: relative;
+}
+/* Sidebar styling */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #f8f9fa;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Chatbox container */
+.chatbox {
+  flex: 1;
+  margin-left: 290px !important; /* Increased margin to account for sidebar width + padding */
+  padding: 20px;
+}
+
+/* Ensure the chat area doesn't go under the sidebar */
+.chatbox > div {
+  max-width: calc(100% - 40px);
+  height: 100%;
+  margin: 0 auto;
 }
