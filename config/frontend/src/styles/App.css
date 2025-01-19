@@ -10,19 +10,51 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centers the card */
+  transform: translate(-50%, -50%);
   background-color: white;
-  padding: 20px;
-  width: 300px; /* Adjust width */
-  height: 200px; /* Adjust height */
+  padding: 30px;
+  width: 500px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  z-index: 1000; /* Makes sure the popup appears above other elements */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensures the content is spaced out */
-  align-items: center; /* Centers the content horizontally */
-  transition: all 0.3s ease-in-out; /* Smooth animation when it appears/disappears */
+  gap: 20px;
+  overflow-y: auto;
+  max-height: fit-content;
+}
+
+.popup-content {
+  flex: 0 1 auto;
+  overflow-y: auto;
+  padding: 10px;
+  padding-bottom: 0;
+}
+
+.info-section {
+  margin-bottom: 10px;
+  /* Reduced from 20px */
+}
+
+.info-section:last-child {
+  margin-bottom: 0;
+  /* Remove margin for last section */
+}
+
+.info-section h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.info-section p {
+  line-height: 1.5;
+  color: #666;
+}
+
+.popup-card button {
+  margin-top: 0;
+  width: 120px;
+  align-self: center;
 }
 
 /* Background overlay */
@@ -32,8 +64,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
-  z-index: 999; /* Makes sure the overlay is behind the popup */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent dark background */
+  z-index: 999;
+  /* Makes sure the overlay is behind the popup */
 }
 
 /* Button styles inside the popup */
@@ -72,6 +106,7 @@
 .card_container {
   position: relative;
 }
+
 /* Sidebar styling */
 .sidebar {
   position: fixed;
@@ -89,13 +124,32 @@
 /* Chatbox container */
 .chatbox {
   flex: 1;
-  margin-left: 290px !important; /* Increased margin to account for sidebar width + padding */
+  margin-left: 290px !important;
+  /* Increased margin to account for sidebar width + padding */
   padding: 20px;
 }
 
 /* Ensure the chat area doesn't go under the sidebar */
-.chatbox > div {
+.chatbox>div {
   max-width: calc(100% - 40px);
   height: 100%;
   margin: 0 auto;
+}
+
+.basic-info {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.basic-info p {
+  margin: 5px 0;
+  text-align: left;
+}
+
+.basic-info strong {
+  color: #333;
+  width: 140px;
+  display: inline-block;
 }
