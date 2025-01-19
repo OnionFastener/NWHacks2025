@@ -13,7 +13,7 @@ def add(a: int, b: int) -> int:
 
 # Add a dynamic greeting resource
 @mcp.resource("data://{filename}")
-async def get_greeting(filename: str) -> str:
+async def read_resource(filename: str) -> str:
     """Get a personalized greeting"""
     file = open(filename, "r")
     content = file.read()

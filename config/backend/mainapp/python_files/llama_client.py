@@ -1,7 +1,6 @@
 import asyncio
 from typing import Optional
 from contextlib import AsyncExitStack
-import threading
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
@@ -54,6 +53,7 @@ class MCPClient:
             for tool in response.tools
         ]
 
+        resource = asyncio.run(self.session.read_resource("data://drugs_data.csv"))
         # REPLACE WITH GOOD TODO
         context = "Headache medicine: Ibuprofen, Acetaminophen, Aspirin"
 
