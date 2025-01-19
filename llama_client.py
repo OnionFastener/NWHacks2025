@@ -1,13 +1,13 @@
 import asyncio
 from typing import Optional
 from contextlib import AsyncExitStack
+import json
+import ast
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
-from dotenv import load_dotenv
-
-load_dotenv()  # load environment variables from .env
+from happy_llama import Llm
 
 
 class MCPClient:
@@ -15,9 +15,11 @@ class MCPClient:
         # Initialize session and client objects
         self.session: Optional[ClientSession] = None
         self.exit_stack = AsyncExitStack()
+        self.llm_instance = Llm()
 
     # methods will go here
     async def connect_to_server(self, server_script_path: str):
+        print("connecting to server...")
         command = "python"
         server_params = StdioServerParameters(
             command=command, args=[server_script_path], env=None
@@ -30,6 +32,7 @@ class MCPClient:
         self.session = await self.exit_stack.enter_async_context(
             ClientSession(self.stdio, self.write)
         )
+        print("initializing...")
 
         await self.session.initialize()
 
@@ -51,42 +54,60 @@ class MCPClient:
             for tool in response.tools
         ]
 
+        # REPLACE WITH GOOD TODO
+        context = "Headache medicine: Ibuprofen, Acetaminophen, Aspirin"
+
         # Llama call
-        response = self.anthropic.messages.create(
-            model="claude-3-5-sonnet-20241022",
-            max_tokens=1000,
-            messages=messages,
-            tools=available_tools,
-        )
+        self.llm_instance.set_prompt(query, context)
+        response = self.llm_instance.get_response()
 
         # Process response and handle tool calls
         tool_results = []
         final_text = []
 
-        for content in response.content:
-            if content.type == "text":
-                final_text.append(content.text)
-            elif content.type == "tool_use":
-                tool_name = content.name
-                tool_args = content.input
+        response = json.loads(ast.literal_eval(str(response["choices"])[1:-1]))["text"]
 
-                # Execute tool call
-                result = await self.session.call_tool(tool_name, tool_args)
-                tool_results.append({"call": tool_name, "result": result})
-                final_text.append(f"[Calling tool {tool_name} with args {tool_args}]")
+        return response
 
-                # Continue conversation with tool results
-                if hasattr(content, "text") and content.text:
-                    messages.append({"role": "assistant", "content": content.text})
-                messages.append({"role": "user", "content": result.content})
+        # return "\n".join(final_text)
 
-                # Get next response from Claude
-                response = self.anthropic.messages.create(
-                    model="claude-3-5-sonnet-20241022",
-                    max_tokens=1000,
-                    messages=messages,
-                )
+    async def chat_loop(self):
+        """Run an interactive chat loop"""
+        print("\nMCP Client Started!")
+        print("Type your queries or 'quit' to exit.")
 
-                final_text.append(response.content[0].text)
+        while True:
+            try:
+                query = input("\nQuery: ").strip()
 
-        return "\n".join(final_text)
+                if query.lower() == "quit":
+                    break
+
+                response = await self.process_query(query)
+                print("\n" + response)
+
+            except Exception as e:
+                print(f"\nError: {str(e)}")
+
+    async def cleanup(self):
+        """Clean up resources"""
+        await self.exit_stack.aclose()
+
+
+async def main():
+    if len(sys.argv) < 2:
+        print("Usage: python client.py <path_to_server_script>")
+        sys.exit(1)
+
+    client = MCPClient()
+    try:
+        await client.connect_to_server(sys.argv[1])
+        await client.chat_loop()
+    finally:
+        await client.cleanup()
+
+
+if __name__ == "__main__":
+    import sys
+
+    asyncio.run(main())

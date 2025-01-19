@@ -2,7 +2,7 @@ from llama_cpp import Llama
 
 
 class Llm:
-    _prompt = "Answer the question in a few words using the context below."
+    _prompt = "Answer the question in a few words using the context below and your own knowledge. If question doesn't match context, ignore context, recommend doctor."
     _context = " Context: "
     _question = " Question: "
 
@@ -14,10 +14,10 @@ class Llm:
 
     def set_prompt(self, prompt, context):
         self._prompt = (
-            self._prompt
-            + self._context
-            + context
-            + self._question
+            # self._prompt
+            # + self._context
+            # + context
+            self._question
             + prompt
             + " Answer: "
         )
@@ -26,13 +26,17 @@ class Llm:
         output = self._llm(
             self._prompt,
             max_tokens=64,
-            stop=["Question:", "\n"],
-            echo=True,
+            echo=False,
         )
         return output
 
+    def embed_response(self, response):
+        return self._llm.create_embedding(response)
+
     def print_response(
-        self, prompt=_prompt, context="You are a helpful medical assistant"
+        self,
+        prompt=_prompt,
+        context="You are a helpful assistant with lots of knowledge in medicine",
     ):
         if prompt == "":
             print("empty prompt!")
