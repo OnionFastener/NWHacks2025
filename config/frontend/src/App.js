@@ -11,11 +11,45 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [isFirstTime, setIsFirstTime] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
+  const [popupContent, setPopupContent] = useState({
+    name: '',
+    dateOfBirth: '',
+    height: '',
+    weight: '',
+    emergencyContact: '',
+    allergies: '',
+    medicalConditions: '',
+    currentMedications: ''
+  });
 
   const togglePopup = () => {
-    console.log("toggled")
+    if (!showPopup) {
+      const userData = JSON.parse(localStorage.getItem('userMedicalData')) || {};
+      
+      setPopupContent({
+        name: userData.fullName || 'Not provided',
+        dateOfBirth: userData.dateOfBirth || 'Not provided',
+        height: userData.height ? `${userData.height} cm` : 'Not provided',
+        weight: userData.weight ? `${userData.weight} kg` : 'Not provided',
+        emergencyContact: userData.emergencyContact || 'Not provided',
+        allergies: userData.allergies || 'None reported',
+        medicalConditions: userData.medicalConditions || 'None reported',
+        currentMedications: userData.currentMedications || 'None reported'
+      });
+    }
     setShowPopup(!showPopup);
   }
+
+  const calculateAge = (birthDate) => {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    return age;
+  };
 
   useEffect(() => {
     // Check if user has completed onboarding
@@ -111,8 +145,28 @@ function App() {
           />
           {showPopup && (
             <div className="popup-card">
-              <h2>Card Popup!</h2>
-              <p>Data goes here...</p>
+              <h2>Medical ID</h2>
+              <div className="popup-content">
+                <div className="info-section basic-info">
+                  <p><strong>Name:</strong> {popupContent.name}</p>
+                  <p><strong>Date of Birth:</strong> {popupContent.dateOfBirth}</p>
+                  <p><strong>Height:</strong> {popupContent.height}</p>
+                  <p><strong>Weight:</strong> {popupContent.weight}</p>
+                  <p><strong>Emergency Contact:</strong> {popupContent.emergencyContact}</p>
+                </div>
+                <div className="info-section">
+                  <h3>Allergies</h3>
+                  <p>{popupContent.allergies}</p>
+                </div>
+                <div className="info-section">
+                  <h3>Medical Conditions</h3>
+                  <p>{popupContent.medicalConditions}</p>
+                </div>
+                <div className="info-section">
+                  <h3>Current Medications</h3>
+                  <p>{popupContent.currentMedications}</p>
+                </div>
+              </div>
               <button onClick={togglePopup}>Close</button>
             </div>
           )}

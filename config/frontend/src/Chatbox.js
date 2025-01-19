@@ -120,7 +120,20 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
                                         boxSizing: 'border-box'
                                     }}
                                 >
-                                    {formatText(message.text)}
+                                    {message.type === 'ai' ? (
+                                        <div className="model-response">
+                                            <img
+                                                src={require('./images/robot.png')}
+                                                alt="AI Assistant"
+                                                className="robot-icon"
+                                            />
+                                            <div className="response-content">
+                                                {formatText(message.text)}
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        formatText(message.text)
+                                    )}
                                 </div>
                             </div>
                         ))}
