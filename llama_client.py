@@ -65,7 +65,7 @@ class MCPClient:
         tool_results = []
         final_text = []
 
-        response = json.loads(ast.literal_eval(str(response["choices"])[1:-1]))["text"]
+        response = ast.literal_eval(str(response["choices"])[1:-1])["text"]
 
         return response
 
