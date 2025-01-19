@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.61b5680b.css","mappings":"sGAGA,EAGE,UAAW,CADX,qBAAwB,CADxB,QAGF","sources":["index.css"],"sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');\n\n/* base styles */\n* {\n  margin: 0;\n  font-family: \"Quicksand\";\n  color: #333;\n}\n"],"names":[],"sourceRoot":""}
