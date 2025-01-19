@@ -8,7 +8,7 @@ class Llm:
 
     def __init__(self):
         self._llm = Llama(
-            model_path="./models/Llama-3.2-1B-Instruct-Q6_K_L.gguf",
+            model_path="./mainapp/python_files/models/Llama-3.2-1B-Instruct-Q6_K_L.gguf",
             n_gpu_layers=-1,
             n_ctx=4096,
         )

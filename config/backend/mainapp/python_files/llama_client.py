@@ -43,17 +43,17 @@ class MCPClient:
 
     def process_query(self, query: str):
         print("processing query")
-        response = asyncio.run(self.session.list_tools())
-        available_tools = [
-            {
-                "name": tool.name,
-                "description": tool.description,
-                "input_schema": tool.inputSchema,
-            }
-            for tool in response.tools
-        ]
+        # response = asyncio.run(self.session.list_tools())
+        # available_tools = [
+        #     {
+        #         "name": tool.name,
+        #         "description": tool.description,
+        #         "input_schema": tool.inputSchema,
+        #     }
+        #     for tool in response.tools
+        # ]
 
-        resource = asyncio.run(self.session.read_resource("data://drugs_data.csv"))
+        # resource = asyncio.run(self.session.read_resource("data://drugs_data.csv"))
         # REPLACE WITH GOOD TODO
         context = "Headache medicine: Ibuprofen, Acetaminophen, Aspirin"
 
