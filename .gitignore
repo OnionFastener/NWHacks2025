@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/config/backend/mainapp/python_files/models/
 
 # testing
 /coverage
