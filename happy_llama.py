@@ -13,7 +13,7 @@ class Llm:
         self._context.append(
             {
                 "role": "system",
-                "content": "You are a helpful and knowledgeable medical assistant who gives brief correct answers including recommended medications",
+                "content": "You are a helpful and knowledgeable medical assistant who gives brief correct answers including recommended medications. Maximum 3 sentences per response.",
             }
         )
 

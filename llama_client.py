@@ -66,6 +66,9 @@ class MCPClient:
 
         response = response["choices"][0]["message"]["content"]
 
+        if str(response)[0] == "{":
+            response = response["content"]
+
         return response
 
         # return "\n".join(final_text)

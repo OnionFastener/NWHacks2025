@@ -1,6 +1,5 @@
 import happy_llama
 import ast
-import json
 
 
 def main():
