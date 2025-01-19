@@ -86,8 +86,7 @@ const Sidebar = ({ togglePopup, showPopup, chatHistory, activeChat, onNewChat, o
 
     return (
         <div className="sidebar">
-            <h1 className="app-title">{getUserFirstName()}'s
-            Health Companion</h1>
+            <h1 className="app-title">{getUserFirstName()}'s MediCompanion</h1>
 
             <button className="action-button" onClick={handleCardButtonClick}>
                 {showPopup ? 'Close Medical ID' : 'Open Medical ID'}

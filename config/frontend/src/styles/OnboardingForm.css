@@ -3,8 +3,16 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
+    height: 100vh; /* Full-screen height */
+    background: linear-gradient(to bottom right, #ebf8ff, #eef2ff); /* Gradient from blue-50 to indigo-50 */
     padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 100%;
 }
 
 .onboarding-form {

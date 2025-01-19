@@ -11,6 +11,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [isFirstTime, setIsFirstTime] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
+  const [isFirstChat, setIsFirstChat] = useState(false);
   const [popupContent, setPopupContent] = useState({
     name: '',
     dateOfBirth: '',
