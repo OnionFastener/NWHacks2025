@@ -4,8 +4,6 @@ import './styles/Chatbox.css';
 const Chatbox = ({ messages, updateMessages, activeChat }) => {
     const [inputValue, setInputValue] = useState("");
     const chatAreaRef = useRef(null);
-<<<<<<< HEAD
-=======
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const getUserFirstName = () => {
@@ -13,7 +11,6 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
         const fullName = userData.fullName || '';
         return fullName.split(' ')[0];
     };
->>>>>>> amon_final2
 
     // Auto scroll to bottom when messages change
     useEffect(() => {
@@ -33,13 +30,10 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
     const handleSubmit = async () => {
         if (!inputValue.trim() || !activeChat) return;
 
-<<<<<<< HEAD
-=======
         if (!hasSubmitted) {
             setHasSubmitted(true);
         }
 
->>>>>>> amon_final2
         // Add user message immediately
         const updatedMessages = [...messages, { type: 'user', text: inputValue }];
         updateMessages(updatedMessages);
@@ -105,8 +99,6 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
                         marginBottom: '15px'
                     }}
                 >
-<<<<<<< HEAD
-=======
                     {!hasSubmitted && (
                         <div
                             style={{
@@ -126,7 +118,6 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
                         </div>
                     )}
 
->>>>>>> amon_final2
                     <div style={{
                         marginTop: 'auto',
                         display: 'flex',
@@ -159,9 +150,6 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
                                         boxSizing: 'border-box'
                                     }}
                                 >
-<<<<<<< HEAD
-                                    {formatText(message.text)}
-=======
                                     {message.type === 'ai' ? (
                                         <div className="model-response">
                                             <img
@@ -176,7 +164,6 @@ const Chatbox = ({ messages, updateMessages, activeChat }) => {
                                     ) : (
                                         formatText(message.text)
                                     )}
->>>>>>> amon_final2
                                 </div>
                             </div>
                         ))}

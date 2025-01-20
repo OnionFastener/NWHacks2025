@@ -83,11 +83,11 @@ async def setup():
     server_path = "./mainapp/python_files/llama_server.py"
     client = MCPClient()
     try:
-        content = "Acetaminophen,Tylenol,'reliever/fever reducerUses temporarily relieves minor aches and pains due to: minor pain of arthritis , muscular aches, backache, premenstrual and menstrual cramps, the common cold, headache, toothache, temporarily reduces fever','Liver Warning: This product contains acetaminophen. Severe liver damage may occur if you take, more than 6 caplets in 24 hours, which is the maximum daily amount, with other drugs containing acetaminophen, 3 or more alcoholic drinks every day while using this product Allergy Alert: Acetaminophen may cause severe skin reactions.  Symptoms may include: skin reddening, blisters, rash. If a skin reaction occurs, stop use and seek medical help right away. 'Do not use with any other drug containing acetaminophen (prescription or nonprescription). If you are not sure whether a drug contains acetaminophen, ask a doctor or pharmacist.Ibuprofen,Advil,'headaches, toothaches, backaches, mentrual cramps, common cold, muscle aches, minor pain of arthritis, fever','Allergy alert:Ibuprofen may cause a severe allergic reaction, especially in people allergic to aspirin. Symptoms may include:hives facial swelling asthma (wheezing) shock skin reddening rash blisters If an allergic reaction occurs, stop use and seek medical help right away."
+        content = "Medicines: Advil, Tylenol, Dayquil, Nyquil, Pepto-Bismol, Claritin, Aspirin"
         context = {"role": "tool", "content": content}
         chatbot_system = {
             "role": "system",
-            "content": "You are a helpful and knowledgeable medical assistant who gives brief correct answers including recommended medications. Ask for more information if the description is too vague. Maximum 3 sentences per response.",
+            "content": "Don't say you are not a doctor in any case. Recommend the best medicine for the user. Use the given medicine information if you can. Keep the response concise, maximum 3 sentences per response.",
         }
         client.llm_instance = Llm(context, chatbot_system)
         await client.connect_to_server(server_path)

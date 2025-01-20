@@ -15,8 +15,6 @@ const Sidebar = ({ togglePopup, showPopup, chatHistory, activeChat, onNewChat, o
         return fullName.split(' ')[0];
     };
 
-<<<<<<< HEAD
-=======
     const updateCardInfo = async () => {
         const userData = JSON.parse(localStorage.getItem('userMedicalData')) || {};
         
@@ -86,18 +84,13 @@ const Sidebar = ({ togglePopup, showPopup, chatHistory, activeChat, onNewChat, o
         updateCardInfo();
     };
 
->>>>>>> amon_final2
     return (
         <div className="sidebar">
             <h1 className="app-title">{getUserFirstName()}'s MediCompanion</h1>
 
-<<<<<<< HEAD
-            <button className="action-button" onClick={togglePopup}>{showPopup ? 'Close Card' : 'Open Card'}</button>
-=======
             <button className="action-button" onClick={handleCardButtonClick}>
                 {showPopup ? 'Close Medical ID' : 'Open Medical ID'}
             </button>
->>>>>>> amon_final2
             <button 
                 className="action-button" 
                 onClick={clearAllData}

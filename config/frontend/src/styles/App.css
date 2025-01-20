@@ -5,8 +5,6 @@
   overflow: hidden;
 }
 
-<<<<<<< HEAD
-=======
 /* Card container */
 .popup-card {
   position: fixed;
@@ -109,7 +107,6 @@
   position: relative;
 }
 
->>>>>>> amon_final2
 /* Sidebar styling */
 .sidebar {
   position: fixed;
@@ -127,22 +124,12 @@
 /* Chatbox container */
 .chatbox {
   flex: 1;
-<<<<<<< HEAD
-  margin-left: 290px !important; /* Increased margin to account for sidebar width + padding */
-=======
   margin-left: 290px !important;
   /* Increased margin to account for sidebar width + padding */
->>>>>>> amon_final2
   padding: 20px;
 }
 
 /* Ensure the chat area doesn't go under the sidebar */
-<<<<<<< HEAD
-.chatbox > div {
-  max-width: calc(100% - 40px);
-  height: 100%;
-  margin: 0 auto;
-=======
 .chatbox>div {
   max-width: calc(100% - 40px);
   height: 100%;
@@ -165,5 +152,4 @@
   color: #333;
   width: 140px;
   display: inline-block;
->>>>>>> amon_final2
 }

@@ -11,14 +11,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [isFirstTime, setIsFirstTime] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
-<<<<<<< HEAD
 
-  const togglePopup = () => {
-    console.log("toggled")
-    setShowPopup(!showPopup);
-  }
-
-=======
   const [isFirstChat, setIsFirstChat] = useState(false);
   const [popupContent, setPopupContent] = useState({
     name: '',
@@ -60,7 +53,6 @@ function App() {
     return age;
   };
 
->>>>>>> amon_final2
   useEffect(() => {
     // Check if user has completed onboarding
     const userData = localStorage.getItem('userMedicalData');
@@ -155,10 +147,6 @@ function App() {
           />
           {showPopup && (
             <div className="popup-card">
-<<<<<<< HEAD
-              <h2>Card Popup!</h2>
-              <p>Data goes here...</p>
-=======
               <h2>Medical ID</h2>
               <div className="popup-content">
                 <div className="info-section basic-info">
@@ -181,7 +169,6 @@ function App() {
                   <p>{popupContent.currentMedications}</p>
                 </div>
               </div>
->>>>>>> amon_final2
               <button onClick={togglePopup}>Close</button>
             </div>
           )}
